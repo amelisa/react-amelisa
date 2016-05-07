@@ -1,0 +1,75 @@
+{
+  "name": "react-amelisa",
+  "version": "0.1.0",
+  "description": "React integration for Amelisa data engine",
+  "main": "lib",
+  "scripts": {
+    "prepublish": "babel --optional runtime src --out-dir lib",
+    "postpublish": "rm -rf lib",
+    "lint": "standard | snazzy",
+    "test": "mocha --compilers js:babel-core/register \"test/**/*.test.js\""
+  },
+  "homepage": "http://amelisajs.com",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/amelisa/react-amelisa.git"
+  },
+  "bugs": {
+    "url": "https://github.com/amelisa/react-amelisa/issues"
+  },
+  "keywords": [
+    "react",
+    "react-native",
+    "server rendering",
+    "amelisa",
+    "crdt",
+    "offline",
+    "realtime"
+  ],
+  "author": {
+    "email": "vmakhaev@gmail.com",
+    "name": "Vladimir Makhaev"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "babel-runtime": "^6.6.1"
+  },
+  "devDependencies": {
+    "amelisa": "^0.1.22",
+    "amelisa-mongo": "^0.1.0",
+    "babel-cli": "^6.6.5",
+    "babel-core": "^6.7.4",
+    "babel-eslint": "^6.0.3",
+    "babel-plugin-add-module-exports": "^0.1.2",
+    "babel-plugin-transform-runtime": "^6.6.0",
+    "babel-polyfill": "^6.7.4",
+    "babel-preset-es2015": "^6.6.0",
+    "babel-preset-react": "^6.5.0",
+    "babel-preset-stage-0": "^6.5.0",
+    "mocha": "^2.3.0",
+    "react": "^0.14.6",
+    "react-dom": "^0.14.6",
+    "snazzy": "^3.0.1",
+    "standard": "^6.0.8"
+  },
+  "peerDependencies": {
+    "react": "^0.14.6"
+  },
+  "optionalPeerDependencies": {
+    "react-dom": "^0.14.6",
+    "react-native-sqlite-storage": "^2.1.6"
+  },
+  "standard": {
+    "globals": [
+      "assert",
+      "describe",
+      "it",
+      "before",
+      "beforeEach",
+      "after",
+      "afterEach",
+      "fetch"
+    ],
+    "parser": "babel-eslint"
+  }
+}
