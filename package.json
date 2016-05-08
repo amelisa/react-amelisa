@@ -1,7 +1,7 @@
 {
   "name": "react-amelisa",
   "version": "0.1.0",
-  "description": "React integration for Amelisa data engine",
+  "description": "React and React Native integration for Amelisa",
   "main": "lib",
   "scripts": {
     "prepublish": "babel --optional runtime src --out-dir lib",
