@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component, PropTypes, cloneElement } from 'react'
 
 class Input extends Component {
 
@@ -18,9 +18,15 @@ class Input extends Component {
   };
 
   static propTypes = {
+    type: PropTypes.string,
     collectionName: PropTypes.string,
     docId: PropTypes.string,
-    field: PropTypes.string
+    field: PropTypes.string,
+    children: PropTypes.any
+  };
+
+  static defaultProps = {
+    type: 'input'
   };
 
   componentDidMount () {
@@ -45,6 +51,7 @@ class Input extends Component {
 
     let value = this.context.model.get(collectionName, docId, field)
     let { input } = this.refs
+    if (input.refs && input.refs.input) input = input.refs.input
 
     let { selectionStart, selectionEnd } = input
     if (selectionStart > index + howMany) selectionStart = selectionStart + howMany
@@ -62,6 +69,8 @@ class Input extends Component {
 
     let value = this.context.model.get(collectionName, docId, field)
     let { input } = this.refs
+    if (input.refs && input.refs.input) input = input.refs.input
+
     let { selectionStart, selectionEnd } = input
     if (selectionStart > index) selectionStart = selectionStart - howMany
     if (selectionEnd > index) selectionEnd = selectionEnd - howMany
@@ -72,16 +81,43 @@ class Input extends Component {
     input.setSelectionRange(selectionStart, selectionEnd)
   };
 
+  render () {
+    let { type, children } = this.props
+    let { value } = this.state
+
+    if (children) {
+      return cloneElement(children, {
+        ref: 'input',
+        value,
+        onChange: this.onChange
+      })
+    }
+
+    if (type === 'textarea') {
+      return (
+        <textarea
+          {...this.props}
+          ref='input'
+          value={value}
+          onChange={this.onChange}
+        />
+      )
+    }
+
+    return (
+      <input
+        {...this.props}
+        ref='input'
+        value={value}
+        onChange={this.onChange}
+      />
+    )
+  }
+
   onChange = (event) => {
     let { collectionName, docId, field } = this.props
     let { value } = event.nativeEvent.target
     this.context.model.stringDiff([collectionName, docId, field], value)
-  }
-
-  render () {
-    let { value } = this.state
-
-    return <textarea ref='input' className='input' onChange={this.onChange} value={value} />
   }
 }
 
