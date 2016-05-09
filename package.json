@@ -1,6 +1,6 @@
 {
   "name": "react-amelisa",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "React and React Native integration for Amelisa",
   "main": "lib",
   "scripts": {
