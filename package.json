@@ -47,16 +47,16 @@
     "babel-preset-react": "^6.5.0",
     "babel-preset-stage-0": "^6.5.0",
     "mocha": "^2.3.0",
-    "react": "^0.14.6",
-    "react-dom": "^0.14.6",
+    "react": "^15.0.0 || ^0.14.0",
+    "react-dom": "^15.0.0 || ^0.14.0",
     "snazzy": "^3.0.1",
     "standard": "^6.0.8"
   },
   "peerDependencies": {
-    "react": "^0.14.6"
+    "react": "^15.0.0 || ^0.14.0",
   },
   "optionalPeerDependencies": {
-    "react-dom": "^0.14.6",
+    "react-dom": "^15.0.0 || ^0.14.0",
     "react-native-sqlite-storage": "^2.1.6"
   },
   "standard": {
