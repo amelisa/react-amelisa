@@ -11,12 +11,12 @@ function createContainer (Child, ChildLoading) {
 
     static contextTypes = {
       model: PropTypes.object
-    };
+    }
 
     static propTypes = {
       hasResults: PropTypes.bool,
       onFetch: PropTypes.func
-    };
+    }
 
     static isContainer = true;
 
@@ -76,7 +76,7 @@ function createContainer (Child, ChildLoading) {
       this.setDataKeysAndRawSubscribes(nextSubscribeData)
       this.subscription.changeSubscribes(this.rawSubscribes)
       this.subscribeData = nextSubscribeData
-    };
+    }
 
     setDataKeysAndRawSubscribes (subscribeData) {
       this.dataKeys = []

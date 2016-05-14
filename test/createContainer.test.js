@@ -15,7 +15,7 @@ class TestComponent extends Component {
 
   state = {
     userQuery: {}
-  };
+  }
 
   componentWillMount () {
     changeUserQueryForTestComponent = this.changeUserQuery
@@ -29,7 +29,7 @@ class TestComponent extends Component {
     })
     // resubscribe({users: ['users', {[field]: value}]})
     resubscribe()
-  };
+  }
 
   subscribe () {
     let { userQuery } = this.state

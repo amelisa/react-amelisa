@@ -15,7 +15,7 @@ class Input extends Component {
 
   static contextTypes = {
     model: PropTypes.object
-  };
+  }
 
   static propTypes = {
     type: PropTypes.string,
@@ -23,11 +23,11 @@ class Input extends Component {
     docId: PropTypes.string,
     field: PropTypes.string,
     children: PropTypes.any
-  };
+  }
 
   static defaultProps = {
     type: 'input'
-  };
+  }
 
   componentDidMount () {
     let { collectionName, docId } = this.props
@@ -61,7 +61,7 @@ class Input extends Component {
       value
     })
     input.setSelectionRange(selectionStart, selectionEnd)
-  };
+  }
 
   onStringRemove = (eventField, index, howMany) => {
     let { collectionName, docId, field } = this.props
@@ -79,7 +79,7 @@ class Input extends Component {
       value
     })
     input.setSelectionRange(selectionStart, selectionEnd)
-  };
+  }
 
   render () {
     let { type, children } = this.props

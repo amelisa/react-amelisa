@@ -4,7 +4,7 @@ class RootComponent extends Component {
 
   static childContextTypes = {
     model: PropTypes.object
-  };
+  }
 
   getChildContext () {
     // FIXME: fix hack for passing model through react-router
