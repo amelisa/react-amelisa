@@ -74,7 +74,11 @@ function createContainer (Child, ChildLoading) {
       }
 
       this.setDataKeysAndRawSubscribes(nextSubscribeData)
-      this.subscription.changeSubscribes(this.rawSubscribes)
+      this.subscription
+        .changeSubscribes(this.rawSubscribes)
+        .then(() => {
+          this.refresh()
+        })
       this.subscribeData = nextSubscribeData
     }
 
@@ -98,7 +102,7 @@ function createContainer (Child, ChildLoading) {
       // server rendering
       if (isServer && onFetch && !hasResults) { // eslint-disable-line
         let promise = model
-            .subscribe(this.rawSubscribes)
+            .subscribe(...this.rawSubscribes)
             .then((subscription) => {
               this.subscription = subscription
 
@@ -111,7 +115,7 @@ function createContainer (Child, ChildLoading) {
       }
 
       return model
-        .subscribe(this.rawSubscribes)
+        .subscribe(...this.rawSubscribes)
         .then((subscription) => {
           this.subscription = subscription
 

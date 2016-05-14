@@ -1,7 +1,8 @@
 import assert from 'assert'
 import React, { Component } from 'react'
-import { render } from 'react-dom'
+import TestUtils from 'react-addons-test-utils'
 import { Store } from 'amelisa'
+import jsdom from 'mocha-jsdom'
 import { RootComponent, createContainer } from '../src'
 import { renderToStaticMarkup } from '../src/server'
 import { getStorage, collectionName, field, value, sleep } from './util'
@@ -10,6 +11,12 @@ let storage
 let store
 let model
 let changeUserQueryForTestComponent
+
+class Counter extends Component {
+  render () {
+    return <div>{this.props.count}</div>
+  }
+}
 
 class TestComponent extends Component {
 
@@ -26,9 +33,10 @@ class TestComponent extends Component {
 
     this.setState({
       userQuery: {[field]: value}
-    })
-    // resubscribe({users: ['users', {[field]: value}]})
-    resubscribe()
+    }, resubscribe)
+    // resubscribe({
+    //   users: ['users', {[field]: value}]
+    // })
   }
 
   subscribe () {
@@ -42,11 +50,7 @@ class TestComponent extends Component {
   render () {
     let { users } = this.props // eslint-disable-line
 
-    return (
-      <div>
-        {users.length}
-      </div>
-    )
+    return <Counter count={users.length} />
   }
 }
 
@@ -60,6 +64,8 @@ class Root extends RootComponent {
 }
 
 describe('createContainer', () => {
+  jsdom()
+
   beforeEach(async () => {
     storage = await getStorage()
     store = new Store({storage})
@@ -84,17 +90,16 @@ describe('createContainer', () => {
   })
 
   // TODO: fix rerender
-  it.skip('should resubscribe', async () => {
-    // let html = await renderToStaticMarkup(Root, {model})
-    render(<Root model={model} />, document.body)
+  it('should resubscribe', async () => {
+    let renderedComponent = TestUtils.renderIntoDocument(<Root model={model} />)
     await sleep(20)
+    let counter = TestUtils.findRenderedComponentWithType(renderedComponent, Counter)
+    assert.equal(counter.props.count, 5)
 
     assert(changeUserQueryForTestComponent)
 
     changeUserQueryForTestComponent()
     await sleep(20)
-    let html = document.body.innerHTML
-    assert.equal(typeof html, 'string')
-    assert.equal(html, '<div>1</div>')
+    assert.equal(counter.props.count, 1)
   })
 })
