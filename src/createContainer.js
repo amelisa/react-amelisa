@@ -69,6 +69,8 @@ function createContainer (Child, ChildLoading) {
     }
 
     resubscribe = (nextSubscribeData) => {
+      if (!this.subscription) return
+
       if (!nextSubscribeData) {
         nextSubscribeData = this.getSubscribeData(this.props)
       }
